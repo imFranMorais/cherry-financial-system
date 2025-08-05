@@ -98,6 +98,7 @@ header h1 {
     color: white;
     font-size: 2.5rem;
     margin-bottom: 40px;
+    padding-top: 50px;
 }
 
 .summary {
@@ -608,8 +609,8 @@ button:hover {
 .categoria-tab-btn {
     padding: 12px 24px;
     border: none;
-    background: rgba(0, 0, 0, 0.3);
-    color: #DE3163;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
     border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -660,8 +661,8 @@ button:hover {
 .investment-tab-btn {
     padding: 12px 24px;
     border: none;
-    background: rgba(0, 0, 0, 0.3);
-    color: #DE3163;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
     border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease;
