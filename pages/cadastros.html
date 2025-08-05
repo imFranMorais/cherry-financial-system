@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherry - Cadastros</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="../index.html" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: white;">
+                    <span class="cherry-icon">🍒</span>
+                    <span class="brand-name">Cherry</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="pagar.html" class="nav-link">Pagar</a></li>
+                <li><a href="receber.html" class="nav-link">Receber</a></li>
+                <li><a href="terceiros.html" class="nav-link">Terceiros</a></li>
+                <li><a href="investimentos.html" class="nav-link">Investimentos</a></li>
+                <li><a href="metas.html" class="nav-link">Metas</a></li>
+                <li><a href="cadastros.html" class="nav-link active">Cadastros</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <header>
+            <h1>Cadastros</h1>
+        </header>
+
+        <div class="config-tabs">
+            <button class="tab-btn active" onclick="showConfigTab('perfil')">Perfil</button>
+            <button class="tab-btn" onclick="showConfigTab('bancos')">Bancos</button>
+            <button class="tab-btn" onclick="showConfigTab('categorias')">Categorias</button>
+            <button class="tab-btn" onclick="showConfigTab('pagamentos')">Formas Pagamento</button>
+            <button class="tab-btn" onclick="showConfigTab('investimentos')">Investimentos</button>
+        </div>
+
+        <!-- Perfil -->
+        <div id="perfil" class="config-content active">
+            <div class="config-section">
+                <h2>Meu Perfil</h2>
+                <form id="formPerfil" class="config-form">
+                    <input type="text" id="nomeUsuario" placeholder="Seu Nome" required>
+                    <input type="email" id="emailUsuario" placeholder="Seu Email">
+                    <input type="password" id="senhaAtual" placeholder="Senha Atual">
+                    <input type="password" id="novaSenha" placeholder="Nova Senha">
+                    <input type="password" id="confirmarSenha" placeholder="Confirmar Nova Senha">
+                    <button type="submit">Salvar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Bancos -->
+        <div id="bancos" class="config-content">
+            <div class="config-section">
+                <h2>Cadastrar Banco</h2>
+                <form id="formBanco" class="config-form">
+                    <input type="text" id="nomeBanco" placeholder="Nome do Banco" required>
+                    <button type="submit" class="add-btn compact">+</button>
+                </form>
+            </div>
+            
+            <div class="config-section">
+                <h3>Bancos Cadastrados</h3>
+                <div id="listaBancos" class="accounts-list"></div>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- Categorias -->
+        <div id="categorias" class="config-content">
+            <div class="categoria-tabs">
+                <button class="categoria-tab-btn active" onclick="showCategoriaTab('pagar')">Contas a Pagar</button>
+                <button class="categoria-tab-btn" onclick="showCategoriaTab('receber')">Contas a Receber</button>
+            </div>
+            
+            <div id="pagar-tab" class="categoria-tab-content active">
+                <div class="config-section">
+                    <h2>Categorias de Contas a Pagar</h2>
+                    <form id="formCategoriaPagar" class="config-form">
+                        <input type="text" id="nomeCategoriaPagar" placeholder="Nome da Categoria" required>
+                        <button type="submit" class="add-btn compact">+</button>
+                    </form>
+                </div>
+                
+                <div class="config-section">
+                    <h3>Categorias Cadastradas</h3>
+                    <div id="listaCategoriasPagar" class="config-list"></div>
+                </div>
+            </div>
+            
+            <div id="receber-tab" class="categoria-tab-content">
+                <div class="config-section">
+                    <h2>Categorias de Contas a Receber</h2>
+                    <form id="formCategoriaReceber" class="config-form">
+                        <input type="text" id="nomeCategoriaReceber" placeholder="Nome da Categoria" required>
+                        <button type="submit" class="add-btn compact">+</button>
+                    </form>
+                </div>
+                
+                <div class="config-section">
+                    <h3>Categorias Cadastradas</h3>
+                    <div id="listaCategoriasReceber" class="config-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formas de Pagamento -->
+        <div id="pagamentos" class="config-content">
+            <div class="config-section">
+                <h2>Cadastrar Forma de Pagamento</h2>
+                <form id="formPagamento" class="config-form">
+                    <select id="tipoPagamento" required onchange="updatePagamentoFields()">
+                        <option value="">Selecione o Tipo</option>
+                        <option value="dinheiro">Dinheiro</option>
+                        <option value="pix">PIX</option>
+                        <option value="conta">Conta Bancária</option>
+                        <option value="cartao">Cartão</option>
+                        <option value="personalizado">Personalizado</option>
+                    </select>
+                    
+                    <div id="campoPersonalizado" style="display: none;">
+                        <input type="text" id="nomePagamento" placeholder="Nome da Forma">
+                    </div>
+                    
+                    <div id="campoConta" style="display: none;">
+                        <select id="contaPagamento">
+                            <option value="">Selecione a Conta</option>
+                        </select>
+                    </div>
+                    
+                    <div id="campoCartao" style="display: none;">
+                        <select id="cartaoPagamento">
+                            <option value="">Selecione o Cartão</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="add-btn compact">+</button>
+                </form>
+            </div>
+            
+            <div class="config-section">
+                <h3>Formas de Pagamento Cadastradas</h3>
+                <div id="listaPagamentos" class="config-list"></div>
+            </div>
+        </div>
+
+        <!-- Investimentos -->
+        <div id="investimentos" class="config-content">
+            <div class="categoria-tabs">
+                <button class="categoria-tab-btn active" onclick="showCategoriaTab('renda_variavel')">Renda Variável</button>
+                <button class="categoria-tab-btn" onclick="showCategoriaTab('renda_fixa')">Renda Fixa</button>
+            </div>
+            
+            <div id="renda_variavel-tab" class="categoria-tab-content active">
+                <div class="config-section">
+                    <h2>Produtos de Renda Variável</h2>
+                    <form id="formRendaVariavel" class="config-form">
+                        <input type="text" id="nomeProdutoRV" placeholder="Nome do Produto" required>
+                        <button type="submit" class="add-btn compact">+</button>
+                    </form>
+                </div>
+                
+                <div class="config-section">
+                    <h3>Produtos Cadastrados</h3>
+                    <div id="listaProdutosRV" class="config-list"></div>
+                </div>
+            </div>
+            
+            <div id="renda_fixa-tab" class="categoria-tab-content">
+                <div class="config-section">
+                    <h2>Produtos de Renda Fixa</h2>
+                    <form id="formRendaFixa" class="config-form">
+                        <input type="text" id="nomeProdutoRF" placeholder="Nome do Produto" required>
+                        <button type="submit" class="add-btn compact">+</button>
+                    </form>
+                </div>
+                
+                <div class="config-section">
+                    <h3>Produtos Cadastrados</h3>
+                    <div id="listaProdutosRF" class="config-list"></div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© Cherry, 2025. Feito com ♥ em Minas Gerais.</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/cadastros-script.js"></script>
+    <script src="cadastros-functions.js"></script>
+    <script src="banco-tabs.js"></script>
+</body>
+</html>

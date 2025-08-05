@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherry - Metas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: white;">
+                    <span class="cherry-icon">🍒</span>
+                    <span class="brand-name">Cherry</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="pagar.html" class="nav-link">Pagar</a></li>
+                <li><a href="receber.html" class="nav-link">Receber</a></li>
+                <li><a href="terceiros.html" class="nav-link">Terceiros</a></li>
+                <li><a href="investimentos.html" class="nav-link">Investimentos</a></li>
+                <li><a href="metas.html" class="nav-link active">Metas</a></li>
+                <li><a href="cadastros.html" class="nav-link">Cadastros</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <header>
+            <div class="header-content">
+                <h1>Metas</h1>
+                <button class="add-btn" id="addBtn" onclick="openAddModal()">
+                    Nova Meta
+                </button>
+            </div>
+        </header>
+
+        <div class="page-actions">
+            <div class="controls-container">
+                <div class="sort-controls">
+                    <label>Ordenar por:</label>
+                    <select id="sortBy" onchange="sortMetas()">
+                        <option value="prazo">Prazo</option>
+                        <option value="nome">Nome</option>
+                        <option value="valor">Valor</option>
+                        <option value="progresso">Progresso</option>
+                    </select>
+                </div>
+                
+                <div class="filter-controls">
+                    <div class="filter-item">
+                        <label>Prazo:</label>
+                        <select id="filterPrazo" onchange="filterMetas()">
+                            <option value="all">Todos</option>
+                            <option value="curto">Curto Prazo</option>
+                            <option value="medio">Médio Prazo</option>
+                            <option value="longo">Longo Prazo</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-item">
+                        <label>Status:</label>
+                        <select id="filterStatus" onchange="filterMetas()">
+                            <option value="all">Todos</option>
+                            <option value="ativa">Ativa</option>
+                            <option value="concluida">Concluída</option>
+                            <option value="pausada">Pausada</option>
+                        </select>
+                    </div>
+                    
+                    <button class="clear-filters" onclick="clearFilters()">Limpar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="metas-tabs">
+            <button class="meta-tab-btn active" onclick="showMetaTab('todas')">Todas</button>
+            <button class="meta-tab-btn" onclick="showMetaTab('curto')">Curto Prazo</button>
+            <button class="meta-tab-btn" onclick="showMetaTab('medio')">Médio Prazo</button>
+            <button class="meta-tab-btn" onclick="showMetaTab('longo')">Longo Prazo</button>
+        </div>
+
+        <div id="todas" class="meta-tab-content active">
+            <div class="accounts-list" id="todasList"></div>
+        </div>
+
+        <div id="curto" class="meta-tab-content">
+            <div class="accounts-list" id="curtoList"></div>
+        </div>
+
+        <div id="medio" class="meta-tab-content">
+            <div class="accounts-list" id="medioList"></div>
+        </div>
+
+        <div id="longo" class="meta-tab-content">
+            <div class="accounts-list" id="longoList"></div>
+        </div>
+    </div>
+
+    <!-- Modal para adicionar meta -->
+    <div id="addModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Nova Meta</h2>
+                <button class="close-btn" onclick="closeAddModal()">&times;</button>
+            </div>
+            
+            <form id="addMetaForm" class="modal-form">
+                <div class="form-group">
+                    <label for="nomeMeta">Nome da Meta</label>
+                    <input type="text" id="nomeMeta" required>
+                </div>
+                
+
+                
+                <div class="form-group">
+                    <label for="valorObjetivo">Valor Objetivo</label>
+                    <input type="number" id="valorObjetivo" step="0.01" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="valorAtual">Valor Atual</label>
+                    <input type="number" id="valorAtual" step="0.01" placeholder="0.00">
+                </div>
+                
+                <div class="form-group">
+                    <label for="dataPrazo">Data Prazo</label>
+                    <input type="date" id="dataPrazo" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="statusMeta">Status</label>
+                    <select id="statusMeta">
+                        <option value="ativa">Ativa</option>
+                        <option value="pausada">Pausada</option>
+                        <option value="concluida">Concluída</option>
+                    </select>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" onclick="closeAddModal()">Cancelar</button>
+                    <button type="submit" class="save-btn">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para editar meta -->
+    <div id="editModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Editar Meta</h2>
+                <button class="close-btn" onclick="closeEditModal()">&times;</button>
+            </div>
+            
+            <form id="editForm" class="modal-form">
+                <div class="form-group">
+                    <label for="editValorAtual">Valor Atual</label>
+                    <input type="number" id="editValorAtual" step="0.01" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editStatusMeta">Status</label>
+                    <select id="editStatusMeta">
+                        <option value="ativa">Ativa</option>
+                        <option value="pausada">Pausada</option>
+                        <option value="concluida">Concluída</option>
+                    </select>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" onclick="closeEditModal()">Cancelar</button>
+                    <button type="submit" class="save-btn">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para confirmar exclusão -->
+    <div id="deleteModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirmar Exclusão</h2>
+                <button class="close-btn" onclick="closeDeleteModal()">&times;</button>
+            </div>
+            
+            <div class="modal-form">
+                <p id="deleteMessage">Tem certeza que deseja excluir esta meta?</p>
+                
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" onclick="closeDeleteModal()">Cancelar</button>
+                    <button type="button" class="save-btn" onclick="confirmDelete()">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© Cherry, 2025. Feito com ♥ em Minas Gerais.</p>
+        </div>
+    </footer>
+
+    <script src="metas-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherry - Investimentos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: white;">
+                    <span class="cherry-icon">🍒</span>
+                    <span class="brand-name">Cherry</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="pagar.html" class="nav-link">Pagar</a></li>
+                <li><a href="receber.html" class="nav-link">Receber</a></li>
+                <li><a href="terceiros.html" class="nav-link">Terceiros</a></li>
+                <li><a href="investimentos.html" class="nav-link active">Investimentos</a></li>
+                <li><a href="metas.html" class="nav-link">Metas</a></li>
+                <li><a href="cadastros.html" class="nav-link">Cadastros</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <header>
+            <div class="header-content">
+                <h1>Investimentos</h1>
+                <button class="add-btn" id="addBtn" onclick="openAddModal()">
+                    Novo Investimento
+                </button>
+            </div>
+        </header>
+
+        <div class="page-actions">
+            <div class="controls-container">
+                <div class="sort-controls">
+                    <label>Ordenar por:</label>
+                    <select id="sortBy" onchange="sortInvestments()">
+                        <option value="aquisicao">Data de Aquisição</option>
+                        <option value="nome">Nome</option>
+                        <option value="valor_atual">Valor Atual</option>
+                        <option value="rendimento">Rendimento</option>
+                    </select>
+                </div>
+                
+                <div class="filter-controls">
+                    <div class="filter-item">
+                        <label>Tipo:</label>
+                        <select id="filterTipo" onchange="filterInvestments()">
+                            <option value="all">Todos</option>
+                            <option value="renda_fixa">Renda Fixa</option>
+                            <option value="renda_variavel">Renda Variável</option>
+                            <option value="fundos">Fundos</option>
+                            <option value="criptomoedas">Criptomoedas</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-item">
+                        <label>Resultado:</label>
+                        <select id="filterResultado" onchange="filterInvestments()">
+                            <option value="all">Todos</option>
+                            <option value="positivo">Positivo</option>
+                            <option value="negativo">Negativo</option>
+                            <option value="neutro">Neutro</option>
+                        </select>
+                    </div>
+                    
+                    <button class="clear-filters" onclick="clearFilters()">Limpar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="investments-summary">
+            <div class="summary-card">
+                <h3>Total Investido</h3>
+                <span id="totalInvestido">R$ 0,00</span>
+            </div>
+            <div class="summary-card">
+                <h3>Valor Atual</h3>
+                <span id="valorAtual">R$ 0,00</span>
+            </div>
+            <div class="summary-card">
+                <h3>Rendimento</h3>
+                <span id="rendimentoTotal">R$ 0,00</span>
+            </div>
+        </div>
+
+        <div class="investments-tabs">
+            <button class="investment-tab-btn active" onclick="showInvestmentTab('todos')">Todos</button>
+            <button class="investment-tab-btn" onclick="showInvestmentTab('renda_fixa')">Renda Fixa</button>
+            <button class="investment-tab-btn" onclick="showInvestmentTab('renda_variavel')">Renda Variável</button>
+        </div>
+
+        <div id="todos" class="investment-tab-content active">
+            <div class="accounts-list" id="todosList"></div>
+        </div>
+
+        <div id="renda_fixa" class="investment-tab-content">
+            <div class="accounts-list" id="rendaFixaList"></div>
+        </div>
+
+        <div id="renda_variavel" class="investment-tab-content">
+            <div class="accounts-list" id="rendaVariavelList"></div>
+        </div>
+    </div>
+
+    <!-- Modal para adicionar investimento -->
+    <div id="addModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Novo Investimento</h2>
+                <button class="close-btn" onclick="closeAddModal()">&times;</button>
+            </div>
+            
+            <form id="addInvestmentForm" class="modal-form">
+                <div class="form-group">
+                    <label for="tipoInvestimento">Tipo</label>
+                    <select id="tipoInvestimento" required onchange="updateProductOptions()">
+                        <option value="">Selecione o tipo</option>
+                        <option value="renda_fixa">Renda Fixa</option>
+                        <option value="renda_variavel">Renda Variável</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="produto">Produto</label>
+                    <select id="produto" required>
+                        <option value="">Selecione o produto</option>
+                    </select>
+                </div>
+                
+                <!-- Campos Renda Fixa -->
+                <div id="rendaFixaFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="data">Data</label>
+                        <input type="date" id="data">
+                    </div>
+                    <div class="form-group">
+                        <label for="operacao">Aporte/Resgate</label>
+                        <select id="operacao">
+                            <option value="aporte">Aporte</option>
+                            <option value="resgate">Resgate</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="emissor">Emissor</label>
+                        <input type="text" id="emissor">
+                    </div>
+                    <div class="form-group">
+                        <label for="corretora">Corretora/Banco</label>
+                        <input type="text" id="corretora">
+                    </div>
+                    <div class="form-group">
+                        <label for="dataVencimento">Data de Vencimento</label>
+                        <input type="date" id="dataVencimento">
+                    </div>
+                    <div class="form-group">
+                        <label for="quantidade">Quantidade</label>
+                        <input type="number" id="quantidade" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="preco">Preço</label>
+                        <input type="number" id="preco" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="taxas">Taxas</label>
+                        <input type="number" id="taxas" step="0.01">
+                    </div>
+                </div>
+                
+                <!-- Campos Renda Variável -->
+                <div id="rendaVariavelFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="ativoRV">Ativo</label>
+                        <input type="text" id="ativoRV">
+                    </div>
+                    <div class="form-group">
+                        <label for="operacaoRV">Compra/Venda</label>
+                        <select id="operacaoRV">
+                            <option value="compra">Compra</option>
+                            <option value="venda">Venda</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="corretoraRV">Corretora/Banco</label>
+                        <input type="text" id="corretoraRV">
+                    </div>
+                    <div class="form-group">
+                        <label for="dataRV">Data</label>
+                        <input type="date" id="dataRV">
+                    </div>
+                    <div class="form-group">
+                        <label for="quantidadeRV">Quantidade</label>
+                        <input type="number" id="quantidadeRV" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="precoRV">Preço</label>
+                        <input type="number" id="precoRV" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="tarifas">Tarifas</label>
+                        <input type="number" id="tarifas" step="0.01">
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" onclick="closeAddModal()">Cancelar</button>
+                    <button type="submit" class="save-btn">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para editar investimento -->
+    <div id="editModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Editar Investimento</h2>
+                <button class="close-btn" onclick="closeEditModal()">&times;</button>
+            </div>
+            
+            <form id="editForm" class="modal-form">
+                <div class="form-group">
+                    <label for="editValorAtual">Valor Atual</label>
+                    <input type="number" id="editValorAtual" step="0.01" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editStatus">Status</label>
+                    <select id="editStatus" onchange="toggleConclusaoFields()">
+                        <option value="ativo">Ativo</option>
+                        <option value="concluido">Concluído</option>
+                    </select>
+                </div>
+                
+                <div id="conclusaoFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="dataConclusao">Data de Conclusão</label>
+                        <input type="date" id="dataConclusao">
+                    </div>
+                    <div class="form-group">
+                        <label for="valorRecebido">Valor Recebido</label>
+                        <input type="number" id="valorRecebido" step="0.01">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="rendimentoValor">Rendimento Recebido (R$)</label>
+                    <input type="number" id="rendimentoValor" step="0.01" placeholder="0.00">
+                </div>
+                
+                <div class="form-group">
+                    <label for="rendimentoData">Data do Rendimento</label>
+                    <input type="date" id="rendimentoData">
+                </div>
+
+                
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" onclick="closeEditModal()">Cancelar</button>
+                    <button type="submit" class="save-btn">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para confirmar exclusão -->
+    <div id="deleteModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirmar Exclusão</h2>
+                <button class="close-btn" onclick="closeDeleteModal()">&times;</button>
+            </div>
+            
+            <div class="modal-form">
+                <p id="deleteMessage">Tem certeza que deseja excluir este investimento?</p>
+                
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" onclick="closeDeleteModal()">Cancelar</button>
+                    <button type="button" class="save-btn" onclick="confirmDelete()">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© Cherry, 2025. Feito com ♥ em Minas Gerais.</p>
+        </div>
+    </footer>
+
+    <script src="investimentos-script.js"></script>
+</body>
+</html>

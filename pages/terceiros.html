@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherry - Terceiros</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: white;">
+                    <span class="cherry-icon">🍒</span>
+                    <span class="brand-name">Cherry</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="pagar.html" class="nav-link">Pagar</a></li>
+                <li><a href="receber.html" class="nav-link">Receber</a></li>
+                <li><a href="terceiros.html" class="nav-link active">Terceiros</a></li>
+                <li><a href="investimentos.html" class="nav-link">Investimentos</a></li>
+                <li><a href="metas.html" class="nav-link">Metas</a></li>
+                <li><a href="cadastros.html" class="nav-link">Cadastros</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <header>
+            <div class="header-content">
+                <h1>Terceiros</h1>
+                <button class="add-btn" id="addBtn" onclick="openAddModal()">
+                    Nova Transação
+                </button>
+            </div>
+        </header>
+
+        <div class="page-actions">
+            <div class="controls-container">
+                <div class="sort-controls">
+                    <label>Ordenar por:</label>
+                    <select id="sortBy" onchange="sortTransactions()">
+                        <option value="data">Data</option>
+                        <option value="valor">Valor</option>
+                        <option value="pessoa">Pessoa</option>
+                        <option value="tipo">Tipo</option>
+                    </select>
+                </div>
+                
+                <div class="filter-controls">
+                    <div class="filter-item">
+                        <label>Tipo:</label>
+                        <select id="filterTipo" onchange="filterTransactions()">
+                            <option value="all">Todos</option>
+                            <option value="emprestado">Emprestei</option>
+                            <option value="recebido">Peguei Emprestado</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-item">
+                        <label>Status:</label>
+                        <select id="filterStatus" onchange="filterTransactions()">
+                            <option value="all">Todos</option>
+                            <option value="pendente">Pendente</option>
+                            <option value="pago">Quitado</option>
+                        </select>
+                    </div>
+                    
+                    <button class="clear-filters" onclick="clearFilters()">Limpar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="accounts-list" id="transactionsList">
+            <!-- Lista de transações será carregada aqui -->
+        </div>
+    </div>
+
+    <!-- Modal para adicionar transação -->
+    <div id="addModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Nova Transação com Terceiros</h2>
+                <button class="close-btn" onclick="closeAddModal()">&times;</button>
+            </div>
+            
+            <form id="addTransactionForm" class="modal-form">
+                <div class="form-group">
+                    <label for="nomePessoa">Nome da Pessoa</label>
+                    <input type="text" id="nomePessoa" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tipoTransacao">Tipo de Transação</label>
+                    <select id="tipoTransacao" required>
+                        <option value="">Selecione o tipo</option>
+                        <option value="emprestado">Emprestei dinheiro (A Receber)</option>
+                        <option value="recebido">Peguei emprestado (A Pagar)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="valor">Valor</label>
+                    <input type="number" id="valor" step="0.01" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dataTransacao">Data da Transação</label>
+                    <input type="date" id="dataTransacao" required>
+                </div>
+                
+
+                
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" onclick="closeAddModal()">Cancelar</button>
+                    <button type="submit" class="save-btn">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para registrar pagamento/recebimento -->
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="paymentModalTitle">Registrar Pagamento</h2>
+                <button class="close-btn" onclick="closePaymentModal()">&times;</button>
+            </div>
+            
+            <form id="paymentForm" class="modal-form">
+                <div class="form-group">
+                    <label for="dataPagamento">Data do Pagamento/Recebimento</label>
+                    <input type="date" id="dataPagamento" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="valorPagamento">Valor</label>
+                    <input type="number" id="valorPagamento" step="0.01" required>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" onclick="closePaymentModal()">Cancelar</button>
+                    <button type="submit" class="save-btn">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para confirmar exclusão -->
+    <div id="deleteModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirmar Exclusão</h2>
+                <button class="close-btn" onclick="closeDeleteModal()">&times;</button>
+            </div>
+            
+            <div class="modal-form">
+                <p id="deleteMessage">Tem certeza que deseja excluir esta transação?</p>
+                
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" onclick="closeDeleteModal()">Cancelar</button>
+                    <button type="button" class="save-btn" onclick="confirmDelete()">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© Cherry, 2025. Feito com ♥ em Minas Gerais.</p>
+        </div>
+    </footer>
+
+    <script src="terceiros-script.js"></script>
+</body>
+</html>
