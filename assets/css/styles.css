@@ -97,7 +97,7 @@ header {
 header h1 {
     color: white;
     font-size: 2.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .summary {
@@ -527,6 +527,209 @@ button:hover {
 
 .clear-filters-btn:hover {
     background: #5a6268;
+}
+
+.month-select {
+    width: 100%;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.month-select:focus {
+    outline: none;
+    border-color: #DE3163;
+}
+
+.account-select,
+.bank-select {
+    width: 100%;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.account-select:focus,
+.bank-select:focus {
+    outline: none;
+    border-color: #DE3163;
+}
+
+.config-tabs {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cartao-form input, .cartao-form select,
+.conta-form input, .conta-form select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.add-btn.compact {
+    padding: 8px;
+    width: 40px;
+    height: 36px;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #DE3163;
+    color: white;
+    border: none;
+}
+
+.add-btn.compact:hover {
+    background: #c42a56;
+}
+
+.btn-danger {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+}
+
+.categoria-tab-btn {
+    padding: 12px 24px;
+    border: none;
+    background: rgba(0, 0, 0, 0.3);
+    color: #DE3163;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 10px;
+}
+
+.categoria-tab-btn.active,
+.categoria-tab-btn:hover {
+    background: white;
+    color: #DE3163;
+}
+
+.investments-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.summary-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    border: 1px solid rgba(222, 49, 99, 0.1);
+}
+
+.summary-card h3 {
+    color: #666;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.summary-card span {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.investments-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.investment-tab-btn {
+    padding: 12px 24px;
+    border: none;
+    background: rgba(0, 0, 0, 0.3);
+    color: #DE3163;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 10px;
+}
+
+.investment-tab-btn.active,
+.investment-tab-btn:hover {
+    background: white;
+    color: #DE3163;
+}
+
+.investment-tab-content {
+    display: none;
+}
+
+.investment-tab-content.active {
+    display: block;
+}
+
+.rendimento-neutro {
+    color: #666;
+}
+
+.status-badge.ativo {
+    background: #e8f5e8;
+    color: #27ae60;
+}
+
+.status-badge.concluido {
+    background: #e8e8e8;
+    color: #666;
+}
+
+.rendimento-info {
+    font-size: 0.8rem;
+    color: #27ae60;
+    margin-top: 2px;
+}
+
+.prazo-badge.curto {
+    background: #ffebee;
+    color: #e74c3c;
+}
+
+.prazo-badge.medio {
+    background: #fff3e0;
+    color: #f39c12;
+}
+
+.prazo-badge.longo {
+    background: #e8f5e8;
+    color: #27ae60;
+}
+
+.status-badge.ativa {
+    background: #e8f5e8;
+    color: #27ae60;
+}
+
+.status-badge.pausada {
+    background: #fff3e0;
+    color: #f39c12;
+}
+
+.status-badge.concluida {
+    background: #e8e8e8;
+    color: #666;
 }
 
 .year-input {
