@@ -12,8 +12,10 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         return;
     }
     
-    // Simple validation (in a real app, this would be server-side)
-    if (email && password) {
+    // Check if user exists and password matches
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    
+    if (userData && userData.email === email && userData.password === password) {
         // Store login status
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userEmail', email);
@@ -25,8 +27,10 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         setTimeout(() => {
             window.location.href = 'dashboard.html';
         }, 1500);
+    } else if (!userData) {
+        showNotification('Usuário não encontrado. Cadastre-se primeiro!', 'error');
     } else {
-        showNotification('Por favor, preencha todos os campos!', 'error');
+        showNotification('Email ou senha incorretos!', 'error');
     }
 });
 
