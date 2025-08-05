@@ -23,7 +23,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         
         // Redirect to dashboard after a short delay
         setTimeout(() => {
-            window.location.href = 'index.html';
+            window.location.href = 'dashboard.html';
         }, 1500);
     } else {
         showNotification('Por favor, preencha todos os campos!', 'error');

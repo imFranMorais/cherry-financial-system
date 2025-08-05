@@ -3,180 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cherry - Sistema Financeiro</title>
-    <meta name="description" content="Sistema completo de gestão financeira pessoal com controle de contas, investimentos e metas">
-    <meta name="keywords" content="finanças, gestão financeira, controle de gastos, investimentos, metas">
+    <title>Cherry - Gestão Financeira Pessoal</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/home-styles.css">
 </head>
 <body>
-    <nav class="navbar" role="navigation" aria-label="Navegação principal">
+    <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <a href="index.html" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: white;" aria-label="Página inicial do Cherry">
-                    <span class="cherry-icon" role="img" aria-label="Ícone Cherry">🍒</span>
-                    <span class="brand-name">Cherry</span>
-                </a>
+                <span class="cherry-icon">🍒</span>
+                <span class="brand-name">Cherry</span>
             </div>
-            <ul class="nav-menu" role="menubar">
-                <li role="none"><a href="pages/pagar.html" class="nav-link" role="menuitem">Pagar</a></li>
-                <li role="none"><a href="pages/receber.html" class="nav-link" role="menuitem">Receber</a></li>
-                <li role="none"><a href="pages/terceiros.html" class="nav-link" role="menuitem">Terceiros</a></li>
-                <li role="none"><a href="pages/investimentos.html" class="nav-link" role="menuitem">Investimentos</a></li>
-                <li role="none"><a href="pages/metas.html" class="nav-link" role="menuitem">Metas</a></li>
-                <li role="none"><a href="pages/cadastros.html" class="nav-link" role="menuitem">Cadastros</a></li>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Início</a></li>
+                <li><a href="login.html" class="nav-link">Entrar</a></li>
+                <li><a href="cadastro.html" class="nav-link">Cadastre-se</a></li>
             </ul>
         </div>
     </nav>
 
-    <main class="container main-container">
-        <header>
-            <h1>Dashboard Financeiro</h1>
-            <div class="summary">
-                <div class="card">
-                    <h3>A Pagar</h3>
-                    <span id="totalPagar" aria-label="Total de contas a pagar">R$ 0,00</span>
-                </div>
-                <div class="card">
-                    <h3>A Receber</h3>
-                    <span id="totalReceber" aria-label="Total de contas a receber">R$ 0,00</span>
-                </div>
-                <div class="card">
-                    <h3>Saldo</h3>
-                    <span id="totalSaldo" aria-label="Saldo total">R$ 0,00</span>
-                </div>
-                <div class="card">
-                    <h3>Recebido</h3>
-                    <span id="totalRecebido" aria-label="Total recebido">R$ 0,00</span>
-                </div>
-                <div class="card">
-                    <h3>Investimentos</h3>
-                    <span id="totalInvestimentos" aria-label="Total em investimentos">R$ 0,00</span>
-                </div>
+    <main class="main-content">
+        <div class="hero-section">
+            <div class="hero-content">
+                <div class="hero-icon">🍒</div>
+                <h1>Cherry</h1>
+                <p>Sua gestão financeira pessoal simplificada</p>
+                <a href="cadastro.html" class="cta-button">Comece aqui</a>
             </div>
-        </header>
+        </div>
 
-        <section class="dashboard-section" aria-label="Seção de gráficos e filtros">
-            <div class="dashboard-container">
-                <aside class="filters-sidebar" role="complementary" aria-label="Filtros do dashboard">
-                    <h3>Filtros</h3>
-                    
-                    <div class="filter-group">
-                        <h4>Ano</h4>
-                        <div class="filter-buttons" id="yearFilters" role="group" aria-label="Filtros por ano">
-                            <button class="filter-btn active" data-year="all" aria-pressed="true">Todos</button>
-                        </div>
-                        <input type="number" id="customYear" placeholder="Digite o ano" min="2000" max="2099" class="year-input" aria-label="Ano personalizado">
-                    </div>
-                    
-                    <div class="filter-group">
-                        <h4>Mês</h4>
-                        <select id="monthSelect" class="month-select" aria-label="Filtro por mês">
-                            <option value="all">Todos</option>
-                            <option value="1">Janeiro</option>
-                            <option value="2">Fevereiro</option>
-                            <option value="3">Março</option>
-                            <option value="4">Abril</option>
-                            <option value="5">Maio</option>
-                            <option value="6">Junho</option>
-                            <option value="7">Julho</option>
-                            <option value="8">Agosto</option>
-                            <option value="9">Setembro</option>
-                            <option value="10">Outubro</option>
-                            <option value="11">Novembro</option>
-                            <option value="12">Dezembro</option>
-                        </select>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <h4>Contas</h4>
-                        <select id="accountSelect" class="account-select" aria-label="Filtro por conta">
-                            <option value="all">Todas</option>
-                        </select>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <h4>Bancos</h4>
-                        <select id="bankSelect" class="bank-select" aria-label="Filtro por banco">
-                            <option value="all">Todos</option>
-                        </select>
-                    </div>
-                    
-                    <button class="clear-filters-btn" onclick="app.clearFilters()" aria-label="Limpar todos os filtros">Limpar Filtros</button>
-                </aside>
-                
-                <div class="charts-container" role="region" aria-label="Gráficos financeiros">
-                    <div class="chart-card">
-                        <h3>Contas a Receber</h3>
-                        <canvas id="receberChart" width="300" height="200" aria-label="Gráfico de contas a receber"></canvas>
-                    </div>
-                    <div class="chart-card">
-                        <h3>Principais Fontes de Receita</h3>
-                        <canvas id="fontesReceitaChart" width="300" height="200" aria-label="Gráfico de fontes de receita"></canvas>
-                    </div>
-                    
-                    <div class="chart-card">
+        <div class="features-section">
+            <div class="container">
+                <h2>Funcionalidades</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">💳</div>
                         <h3>Contas a Pagar</h3>
-                        <canvas id="pagarChart" width="300" height="200" aria-label="Gráfico de contas a pagar"></canvas>
+                        <p>Gerencie suas despesas e nunca mais perca um vencimento</p>
                     </div>
-                    <div class="chart-card">
-                        <h3>Principais Fontes de Despesas</h3>
-                        <canvas id="fontesDespesasChart" width="300" height="200" aria-label="Gráfico de fontes de despesas"></canvas>
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3>Contas a Receber</h3>
+                        <p>Controle seus recebimentos e organize sua renda</p>
                     </div>
-                    <div class="chart-card">
-                        <h3>Desempenho do Mês</h3>
-                        <canvas id="desempenhoMesChart" width="300" height="200" aria-label="Gráfico de desempenho mensal"></canvas>
-                    </div>
-                    
-                    <div class="chart-card">
-                        <h3>Diferença Pagar vs Receber</h3>
-                        <canvas id="diferencaChart" width="300" height="200" aria-label="Gráfico de diferença entre pagar e receber"></canvas>
-                    </div>
-                    
-                    <div class="chart-card">
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
                         <h3>Investimentos</h3>
-                        <canvas id="investimentosChart" width="300" height="200" aria-label="Gráfico de investimentos"></canvas>
+                        <p>Acompanhe seus investimentos e rendimentos</p>
                     </div>
-                    <div class="chart-card">
-                        <h3>Perfil de Investidor</h3>
-                        <canvas id="perfilInvestidorChart" width="300" height="200" aria-label="Gráfico de perfil de investidor"></canvas>
-                    </div>
-                    
-                    <div class="chart-card">
-                        <h3>Patrimônio (Ativo vs Passivo)</h3>
-                        <canvas id="patrimonioChart" width="300" height="200" aria-label="Gráfico de patrimônio"></canvas>
-                    </div>
-                    
-                    <div class="chart-card">
-                        <h3>Saldo por Banco</h3>
-                        <canvas id="saldoBancosChart" width="300" height="200" aria-label="Gráfico de saldo por banco"></canvas>
-                    </div>
-                    
-                    <div class="chart-card">
-                        <h3>Alocação Renda Fixa</h3>
-                        <canvas id="alocacaoRendaFixaChart" width="300" height="200" aria-label="Gráfico de alocação em renda fixa"></canvas>
-                    </div>
-                    
-                    <div class="chart-card">
-                        <h3>Alocação Renda Variável</h3>
-                        <canvas id="alocacaoRendaVariavelChart" width="300" height="200" aria-label="Gráfico de alocação em renda variável"></canvas>
-                    </div>
-                    
-                    <div class="chart-card">
-                        <h3>Progresso das Metas</h3>
-                        <canvas id="metasChart" width="300" height="200" aria-label="Gráfico de progresso das metas"></canvas>
+                    <div class="feature-card">
+                        <div class="feature-icon">🏦</div>
+                        <h3>Contas Bancárias</h3>
+                        <p>Organize suas contas e cartões em um só lugar</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
-    <footer class="footer" role="contentinfo">
+    <footer class="footer">
         <div class="container">
             <p>© Cherry, 2025. Feito com ♥ em Minas Gerais.</p>
         </div>
     </footer>
 
-    <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/home-script.js"></script>
 </body>
 </html>
