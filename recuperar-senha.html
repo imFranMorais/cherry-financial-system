@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherry - Recuperar Senha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/home-styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="cherry-icon">🍒</span>
+                <span class="brand-name">Cherry</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="home.html" class="nav-link">Início</a></li>
+                <li><a href="login.html" class="nav-link">Entrar</a></li>
+                <li><a href="cadastro.html" class="nav-link">Cadastre-se</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="login-section">
+            <div class="login-container">
+                <div class="login-box">
+                    <div class="login-header">
+                        <h2>Recuperar Senha</h2>
+                        <p>Digite seu email para receber as instruções de recuperação</p>
+                    </div>
+                    <form id="recoverForm" class="login-form">
+                        <label for="recoverEmail">Email</label>
+                        <input type="email" id="recoverEmail" placeholder="Digite seu email" required>
+                        <button type="submit" class="login-button">Enviar Instruções</button>
+                    </form>
+                    <div class="login-footer">
+                        <p>Lembrou da senha? <a href="login.html">Voltar ao login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© Cherry, 2025. Feito com ♥ em Minas Gerais.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('recoverForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('recoverEmail').value;
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Por favor, digite um email válido!');
+                return;
+            }
+            
+            if (email) {
+                alert('Instruções de recuperação enviadas para ' + email);
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>

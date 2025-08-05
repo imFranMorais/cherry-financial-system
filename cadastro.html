@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherry - Cadastre-se</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/home-styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="cherry-icon">🍒</span>
+                <span class="brand-name">Cherry</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="home.html" class="nav-link">Início</a></li>
+                <li><a href="login.html" class="nav-link">Entrar</a></li>
+                <li><a href="cadastro.html" class="nav-link active">Cadastre-se</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="login-section">
+            <div class="login-container">
+                <div class="login-box">
+                    <div class="login-header">
+                        <h2>Cadastre-se</h2>
+                    </div>
+                    <form id="cadastroForm" class="login-form">
+                        <label for="nomeCompleto">Nome Completo</label>
+                        <input type="text" id="nomeCompleto" placeholder="Digite seu nome completo" required>
+                        
+                        <label for="emailCadastro">Email</label>
+                        <input type="email" id="emailCadastro" placeholder="Digite seu email" required>
+                        
+                        <label for="senhaCadastro">Senha</label>
+                        <input type="password" id="senhaCadastro" placeholder="Digite sua senha" required>
+                        
+                        <label for="repetirSenha">Repita sua senha</label>
+                        <input type="password" id="repetirSenha" placeholder="Repita sua senha" required>
+                        
+                        <button type="submit" class="login-button">Salvar</button>
+                    </form>
+                    <div class="login-footer">
+                        <p>Já tem uma conta? <a href="login.html">Faça login aqui</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© Cherry, 2025. Feito com ♥ em Minas Gerais.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/cadastro-script.js"></script>
+</body>
+</html>

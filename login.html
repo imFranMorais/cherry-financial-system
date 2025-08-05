@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherry - Entrar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/home-styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="cherry-icon">🍒</span>
+                <span class="brand-name">Cherry</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="home.html" class="nav-link">Início</a></li>
+                <li><a href="login.html" class="nav-link active">Entrar</a></li>
+                <li><a href="cadastro.html" class="nav-link">Cadastre-se</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="login-section">
+            <div class="login-container">
+                <div class="login-box">
+                    <div class="login-header">
+                        <h2>Entrar</h2>
+                        <p>Acesse sua conta cadastrada no Cherry</p>
+                    </div>
+                    <form id="loginForm" class="login-form">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" placeholder="Digite seu email" required>
+                        <label for="loginPassword">Senha</label>
+                        <input type="password" id="loginPassword" placeholder="Digite sua senha" required>
+                        <div class="forgot-password">
+                            <a href="recuperar-senha.html">Esqueceu a senha?</a>
+                        </div>
+                        <button type="submit" class="login-button">Entrar</button>
+                    </form>
+                    <div class="login-footer">
+                        <p>Não tem uma conta? <a href="cadastro.html">Crie uma conta agora!</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© Cherry, 2025. Feito com ♥ em Minas Gerais.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/login-script.js"></script>
+</body>
+</html>
