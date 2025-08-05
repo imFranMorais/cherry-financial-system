@@ -38,9 +38,13 @@ Um sistema completo de gestão financeira pessoal desenvolvido com HTML, CSS e J
 cherry-financial-system/
 ├── assets/
 │   ├── css/
-│   │   └── styles.css
+│   │   ├── styles.css (área logada)
+│   │   └── home-styles.css (páginas públicas)
 │   ├── js/
 │   │   ├── scripts.js (dashboard)
+│   │   ├── home-script.js
+│   │   ├── login-script.js
+│   │   ├── cadastro-script.js
 │   │   ├── pagar-script.js
 │   │   ├── receber-script.js
 │   │   ├── terceiros-script.js
@@ -48,14 +52,18 @@ cherry-financial-system/
 │   │   ├── metas-script.js
 │   │   └── cadastros-script.js
 │   └── images/
-├── pages/
+├── pages/ (área logada)
 │   ├── pagar.html
 │   ├── receber.html
 │   ├── terceiros.html
 │   ├── investimentos.html
 │   ├── metas.html
 │   └── cadastros.html
-├── index.html
+├── index.html (página inicial pública)
+├── login.html
+├── cadastro.html
+├── recuperar-senha.html
+├── dashboard.html (área logada - dashboard principal)
 └── README.md
 ```
 
@@ -90,10 +98,17 @@ O sistema é totalmente responsivo e funciona em:
 
 ## 🔧 Como Usar
 
-1. Abra o arquivo `index.html` em um navegador moderno
-2. Configure seus bancos e contas em "Cadastros"
-3. Adicione suas transações nas respectivas seções
-4. Acompanhe seu progresso no dashboard
+### Primeira Vez
+1. Abra o arquivo `index.html` (página inicial pública)
+2. Clique em "Cadastre-se" para criar sua conta
+3. Faça login para acessar o sistema
+
+### Uso Regular
+1. Acesse `index.html` e faça login
+2. Será redirecionado para `dashboard.html` (área logada)
+3. Configure seus bancos e contas em "Cadastros"
+4. Adicione suas transações nas respectivas seções
+5. Acompanhe seu progresso no dashboard
 
 ## 💾 Armazenamento
 
@@ -112,6 +127,23 @@ Todos os dados são armazenados localmente no navegador usando LocalStorage:
 - Dados armazenados apenas localmente
 - Nenhuma informação enviada para servidores externos
 - Controle total do usuário sobre seus dados
+
+## 🔄 Fluxo de Navegação
+
+### Páginas Públicas
+- **`index.html`**: Página inicial com apresentação do sistema
+- **`login.html`**: Autenticação de usuários
+- **`cadastro.html`**: Registro de novos usuários
+- **`recuperar-senha.html`**: Recuperação de senha
+
+### Área Logada
+- **`dashboard.html`**: Dashboard principal com gráficos e resumos
+- **`pages/`**: Todas as funcionalidades do sistema (pagar, receber, etc.)
+
+### Redirecionamentos
+- Login bem-sucedido → `dashboard.html`
+- Ícone Cherry nas páginas internas → `dashboard.html`
+- Logout → `index.html`
 
 ## 🌟 Características Técnicas
 
