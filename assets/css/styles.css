@@ -91,6 +91,7 @@ header {
     color: white;
     font-size: 2.5rem;
     margin: 0;
+    padding-top: 25px;
 }
 
 header h1 {
