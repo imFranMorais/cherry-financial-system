@@ -1,0 +1,146 @@
+/* Estilos adicionais para página de cadastros */
+
+.account-select,
+.bank-select {
+    width: 100%;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.account-select:focus,
+.bank-select:focus {
+    outline: none;
+    border-color: #DE3163;
+}
+
+.config-content {
+    display: none;
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.config-content.active {
+    display: block;
+}
+
+.config-section {
+    margin-bottom: 30px;
+}
+
+.config-section h2,
+.config-section h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.config-form {
+    display: flex;
+    gap: 10px;
+    align-items: end;
+    margin-bottom: 20px;
+}
+
+.config-form input,
+.config-form select {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.config-form input:focus,
+.config-form select:focus {
+    outline: none;
+    border-color: #DE3163;
+}
+
+.config-list {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 15px;
+    min-height: 100px;
+}
+
+.config-item {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border-left: 4px solid #DE3163;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.config-item:last-child {
+    margin-bottom: 0;
+}
+
+.config-item-info {
+    flex: 1;
+}
+
+.config-item-info h4 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.config-item-info p {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+.config-item-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-edit {
+    background: #f39c12;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.3s ease;
+}
+
+.btn-edit:hover {
+    background: #e67e22;
+}
+
+.btn-remove {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.3s ease;
+}
+
+.btn-remove:hover {
+    background: #c0392b;
+}
+
+.categoria-tab-content {
+    display: none;
+}
+
+.categoria-tab-content.active {
+    display: block;
+}
